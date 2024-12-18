@@ -1,19 +1,9 @@
+use crate::common::{Behavior, SCROLL_TO_TOP_STYLE};
 use gloo::events::EventListener;
 use gloo::utils::window;
 use wasm_bindgen::JsValue;
 use web_sys::{Element, ScrollBehavior, ScrollToOptions};
 use yew::prelude::*;
-
-#[derive(Clone, PartialEq)]
-pub enum Behavior {
-    Auto,
-    Instant,
-    Smooth,
-}
-
-/// Default CSS style for the scroll-to-top button.
-const SCROLL_TO_TOP_STYLE: &'static str =
-    "position: fixed; bottom: 1rem; right: 1rem; background-color: #3b82f6; color: #ffffff; padding: 0.75rem; border-radius: 50%; cursor: pointer; transition: background-color 300ms ease-in-out;";
 
 /// Properties for configuring the `Scroll` component.
 ///
@@ -36,12 +26,12 @@ pub struct ScrollProps {
     #[prop_or_default]
     pub class: &'static str,
 
-    /// Custom content for the scroll button.
+    /// Custom icon for the scroll button.
     ///
     /// This can be an SVG, HTML, or any valid Yew `Html` type to define the
     /// button's visual representation. Defaults to an internal SVG icon.
     #[prop_or_else(default_svg)]
-    pub content: Html,
+    pub icon: Html,
 
     /// Behavior of the scroll action.
     ///
@@ -183,7 +173,8 @@ pub struct ScrollProps {
 ///
 /// ## Custom Content and Style
 /// ```rust
-/// use scroll_rs::yew::{Scroll, Behavior};
+/// use scroll_rs::yew::Scroll;
+/// use scroll_rs::Behavior;
 /// use yew::prelude::*;
 ///
 /// #[function_component(CustomScrollButton)]
@@ -191,7 +182,7 @@ pub struct ScrollProps {
 ///     html! {
 ///         <Scroll
 ///             style="position: fixed; bottom: 2rem; right: 2rem; background-color: #10B981; border-radius: 50%; padding: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"
-///             content={html! {
+///             icon={html! {
 ///                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
 ///                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7 7 7M5 19l7-7 7 7" />
 ///                 </svg>
@@ -220,7 +211,7 @@ pub struct ScrollProps {
 ///             <Scroll
 ///                 scroll_id="section1"
 ///                 style="position: fixed; bottom: 4rem; right: 3rem; background-color: #6B7280; color: #FFFFFF; padding: 1rem; border-radius: 50%;"
-///                 content={html! {
+///                 icon={html! {
 ///                     <span>{"Scroll to Section 1"}</span>
 ///                 }}
 ///             />
@@ -316,7 +307,7 @@ pub fn scroll(props: &ScrollProps) -> Html {
     html! {
         if is_visible {
             <div class={props.class} style={props.style} onclick={on_click}>
-                { props.content.clone() }
+                { props.icon.clone() }
             </div>
         }
     }
@@ -366,7 +357,7 @@ fn scroll_to(
     }
 }
 
-/// Default SVG content for the scroll button.
+/// Default SVG icon for the scroll button.
 fn default_svg() -> Html {
     html! {
         <svg

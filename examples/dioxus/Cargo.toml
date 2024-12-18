@@ -1,0 +1,22 @@
+[package]
+name = "scroll-rs-dioxus-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dioxus = { version = "0.6.1", features = ["web"] }
+scroll-rs = { path = "../../", features = ["dio"] }
+dioxus-logger = "0.6.1"
+regex = "1.11.1"
+
+[profile]
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"
