@@ -25,7 +25,7 @@ pub fn home() -> Html {
                 <div title="Scroll to Bottom">
                     <Scroll
                         style="position: fixed; bottom: 4rem; right: 3rem; background-color: #10B981; color: #FFFFFF; padding: 1rem; border-radius: 50%; cursor: pointer; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);"
-                        content={html! {
+                        icon={html! {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
@@ -37,7 +37,7 @@ pub fn home() -> Html {
                 <div title="Scroll to the Left">
                     <Scroll
                         style="position: fixed; top: 40%; left: 2rem; background-color: #E11D48; color: #FFFFFF; padding: 1rem; border-radius: 50%; cursor: pointer; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);"
-                        content={html! {
+                        icon={html! {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                             </svg>
@@ -50,7 +50,7 @@ pub fn home() -> Html {
                 <div title="Scroll to the Right">
                     <Scroll
                         style="position: fixed; top: 40%; right: 2rem; background-color: #F59E0B; color: #FFFFFF; padding: 1rem; border-radius: 50%; cursor: pointer; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);"
-                        content={html! {
+                        icon={html! {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
