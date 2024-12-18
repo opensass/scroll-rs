@@ -34,3 +34,6 @@ incremental = false
 
 [badges]
 maintenance = { status = "actively-developed" }
+
+[dev-dependencies]
+bump2version = "0.1.4"
