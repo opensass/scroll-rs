@@ -1,114 +1,119 @@
-# 🔝 Yew Scroll
+<div align="center">
 
-[![Crates.io](https://img.shields.io/crates/v/yew-scroll)](https://crates.io/crates/yew-scroll)
-[![Crates.io Downloads](https://img.shields.io/crates/d/yew-scroll)](https://crates.io/crates/yew-scroll)
-![Crates.io License](https://img.shields.io/crates/l/yew-scroll)
-![Rust](https://img.shields.io/badge/rust-stable-orange)
+# 🖱️ Scroll-RS
 
-![demo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3wyypvi0bgxwsr0i146j.gif)
+[![Crates.io](https://img.shields.io/crates/v/scroll-rs)](https://crates.io/crates/scroll-rs)
+[![Crates.io Downloads](https://img.shields.io/crates/d/scroll-rs)](https://crates.io/crates/scroll-rs)
+![Crates.io License](https://img.shields.io/crates/l/input-rs)
+[![made-with-rust](https://img.shields.io/badge/Made%20with-Rust-1f425f.svg?logo=rust&logoColor=white)](https://www.rust-lang.org/)
+[![Rust](https://img.shields.io/badge/Rust-1.79%2B-blue.svg)](https://www.rust-lang.org)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/wiseaidev)
 
-## 📜 Introduction
+[![Open SASS Discord](https://dcbadge.limes.pink/api/server/b5JbvHW5nv)](https://discord.gg/b5JbvHW5nv)
 
-This component is designed to provide a convenient and customizable solution for implementing a "scroll to top" button in your Yew applications. Enhance user experience by allowing them to easily navigate to the top of the page with a single click.
+![logo](./assets/logo.png)
 
-## 🤔 Why is this Component Useful?
+</div>
 
-This component comes with several benefits that make it an essential addition to your Yew projects:
+## 🎬 Demo
 
-1. 🔄 Scroll Navigation: Simplify user navigation by adding a convenient button to scroll smoothly to the top of the page.
+![scroll-rs-demo](https://github.com/user-attachments/assets/cee5edb6-bf4f-4abd-8e4c-bc7cba3cd66c)
 
-1. 🎨 Customization: Tailor the appearance of the "scroll to top" button using custom CSS classes, and provide a personalized SVG icon.
+## 📜 Intro
 
-1. 📏 Customizable Offset: Define a custom vertical offset (Y position) to trigger the visibility of the button, ensuring a seamless user experience.
+`Scroll-RS` is a headless, customizable scroll-to-target component for Wasm-based frameworks like **Yew**, **Dioxus**, and **Leptos**. Enhance user experience by enabling smooth, controlled scrolling to specific positions on a page with optional auto-hide and custom styling.
 
-## ⚙️ Installation
+## 🤔 Why Use Scroll-RS?
 
-Integrating this component into your Yew project is a straightforward process. Follow these simple steps:
+The following are some of the reasons why Scroll-RS is a great addition to your Wasm projects:
 
-1. Make sure you have Yew set up in your project. If not, refer to the [Yew documentation](https://yew.rs/docs/getting-started/introduction) for installation instructions.
+1. **← ↑ → ↓ Scroll Anywhere**: Easily navigate to specific sections or positions on the page.
+1. **🎨 Fully Customizable**: Use your own CSS styles, animations, and SVG icons.
+1. **⚡ Smooth Behavior**: Choose between smooth, instant, or delayed scrolling effects.
+1. **👀 Auto-Hide**: Automatically hide or show based on user-defined thresholds.
+1. **🔧 Flexible Offsets**: Adjust scrolling positions and delays with ease.
 
-2. Install the component package using your preferred package manager:
+## ⚙️ Yew Installation
 
-   ```bash
-   $ cargo add yew-scroll
+Adding Scroll-RS to your project is simple:
+
+1. Ensure your project is set up with a Wasm-based framework like **Yew**. Refer to their [Getting Started Guide](https://yew.rs/docs/getting-started/introduction) for setup instructions.
+
+1. Add `scroll-rs` to your dependencies:
+
+   ```sh
+   cargo add scroll-rs --features=yew
    ```
 
-3. Import the component into your Yew application and start using it to improve user navigation.
+1. Import `Scroll` into your component and start enhancing your app's scroll functionality.
 
 ## 🛠️ Usage
 
-Incorporating this component into your application is easy. Follow these steps:
+Below is an example of how to integrate `Scroll-RS` into your Yew app:
 
-1. Import the component and its required dependencies:
+```rust
+use scroll_rs::yew::{Behavior, Scroll};
+use yew::prelude::*;
 
-   ```rust
-   use yew_scroll::{ScrollToTop, ScrollToTopProps};
-   ```
+#[function_component(Home)]
+pub fn home() -> Html {
+    html! {
+        <div class="min-h-screen bg-gray-900 text-white p-8">
+            <h1 class="text-4xl font-bold text-center mb-8">{ "Scroll-RS Demo" }</h1>
+            
+            // Scrollable content
+            <div id="top" class="h-96 bg-gray-700 p-8 text-center">
+                <h2 class="text-3xl font-bold">{ "Top of the Page" }</h2>
+                <p>{ "Scroll down to see buttons in action!" }</p>
+            </div>
+            
+            <div id="bottom" class="h-96 bg-gray-800 p-8 text-center">
+                <h2 class="text-3xl font-bold">{ "Bottom of the Page" }</h2>
+                <p>{ "You reached the bottom!" }</p>
+            </div>
 
-1. Set up the props for the `ScrollToTop` component:
-
-   ```rust
-   // Custom SVG content for the scroll-to-top button (an arrow).
-   fn custom_svg() -> Html {
-       html! {
-           <svg
-               class="w-6 h-6"
-               fill="none"
-               stroke="currentColor"
-               viewBox="0 0 24 24"
-               xmlns="http://www.w3.org/2000/svg"
-           >
-               <path
-                   stroke-linecap="round"
-                   stroke-linejoin="round"
-                   stroke-width="2"
-                   d="M5 10l7-7m0 0l7 7m-7-7v18"
-               />
-           </svg>
-       }
-   }
-
-   // Your custom component.
-   #[function_component(MyComponent)]
-   pub fn my_component() -> Html {
-
-       // Set props for the `ScrollToTop` component
-       let custom_props = ScrollToTopProps {
-           css: "custom-css",         // Add any custom CSS classes
-           top_offset: 0.0,           // Set the desired top offset value to show the button
-           svg_content: custom_svg(), // Provide custom SVG content
-       };
-
-       // Render the `ScrollToTop` component with the specified props
-       html! {
-           <>
-               // Other content in your component
-               <p>{"Scroll down to see the button"}</p>
-
-               // Use the scroll_to_top component
-               <ScrollToTop ..custom_props />
-
-               // Default Usage
-               <ScrollToTop />
-           </>
-       }
-   }
-   ```
-
-1. Customize the appearance and behavior of the "scroll to top" button based on your project requirements.
+            // Scroll components
+            <Scroll
+                style="position: fixed; bottom: 2rem; right: 2rem; background: #10B981; padding: 1rem; border-radius: 50%;"
+                content={html! { <span>{"↑"}</span> }}
+                scroll_id="top"
+            />
+            <Scroll
+                style="position: fixed; bottom: 2rem; left: 2rem; background: #F59E0B; padding: 1rem; border-radius: 50%;"
+                content={html! { <span>{"↓"}</span> }}
+                scroll_id="bottom"
+            />
+        </div>
+    }
+}
+```
 
 ## 🔧 Props
 
-| Name | Type | Description | Example | Default Value |
-| --- | --- | --- | --- | --- |
-| `css` | `&'static str` | Custom CSS classes for styling the button. | "custom-scroll-button", "highlight-button". | "fixed bottom-4 right-4 bg-blue-500 text-white p-3 rounded-full cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out" |
-| `top_offset` | `f64` | The vertical offset value (Y position) to trigger button visibility. | 200.0, 300.0 | 500.0 |
-| `svg_content` | `Html` | Custom SVG content for the button. | `custom_svg()` | `default_svg()` |
+| Property       | Type              | Description                                                        | Default           |
+|----------------|-------------------|--------------------------------------------------------------------|-------------------|
+| `style`        | `&'static str`    | Inline CSS styles for the scroll button.                          | Default styling   |
+| `class`        | `&'static str`    | Custom CSS classes for styling the button.                        | None              |
+| `content`      | `Html`            | Custom content (HTML/SVG) for the scroll button.                  | Default SVG       |
+| `behavior`     | `Behavior`        | Scrolling behavior: `Smooth`, `Instant`.                          | `Smooth`          |
+| `top`          | `f64`             | Target top position for scrolling.                                | `0.0`             |
+| `left`         | `f64`             | Target left position for scrolling (horizontal scrolling).         | `0.0`             |
+| `offset`       | `f64`             | Offset to apply when scrolling to the target position.            | `0.0`             |
+| `delay`        | `u32`             | Delay (in ms) before initiating the scroll.                       | `0`               |
+| `auto_hide`    | `bool`            | Whether to hide the button automatically based on scroll position.| `true`            |
+| `threshold`    | `f64`             | Scroll threshold to determine button visibility.                  | `20.0` px         |
+| `update_hash`  | `bool`            | Whether to update the URL hash during scrolling.                  | `true`            |
+| `show_id`      | `&'static str`    | ID of the target element for the scroll button visibility logic.  | None              |
+| `scroll_id`    | `&'static str`    | ID of the target container to scroll to.                          | None              |
 
-## 🤝 Contribution
+## 🤝 Contributions
 
-We encourage contributions from the community to enhance this Yew component. Feel free to open issues, submit pull requests, or provide feedback. Let's collaborate and make this component even more powerful!
+Contributions are welcome! Whether it's bug fixes, feature requests, or examples, we would love your help to make Scroll-RS better.
+
+1. Fork the repository.
+1. Create a new branch for your feature/bugfix.
+1. Submit a pull request for review.
 
 ## 📜 License
 
-The Scroll To Top Yew component is licensed under the `MIT` License, allowing you to use, modify, and distribute it freely. Refer to the [`LICENSE`](LICENSE) file for more details.
+Scroll-RS is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute this library in your projects.

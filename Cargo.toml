@@ -1,22 +1,36 @@
 [package]
-name = "yew-scroll"
+name = "scroll-rs"
 version = "0.1.0"
-description = "🔝 A sleek and customizable Yew component for effortless scroll to top functionality."
-license = "MIT"
-keywords = ["scroll-to-top", "yew", "rust", "yew-scroll"]
-repository = "https://github.com/wiseaidev/yew-scroll"
-documentation = "https://docs.rs/yew-scroll/"
-authors = ["Mahmoud Harmouch <oss@wiseai.dev>"]
 edition = "2021"
+rust-version = "1.79"
+description = "🖱️ A headless, customizable scroll-to-target component for WASM frameworks like Yew, Dioxus, and Leptos."
+license = "MIT"
+keywords = ["scroll", "yew", "rust", "dioxus", "leptos"]
+categories = ["web-programming", "science"]
+repository = "https://github.com/opensass/scroll-rs"
+documentation = "https://docs.rs/scroll-rs/"
+authors = ["Mahmoud Harmouch <oss@wiseai.dev>"]
+exclude = ["assets", "examples"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-gloo = { version = "0.11.0", features = ["utils"] }
-yew = { version = "0.21.0", default-features = false }
+wasm-bindgen = "0.2.99"
+web-sys = { version = "0.3.76", features = ["Window", "ScrollToOptions", "ScrollBehavior", "DomRect", "Element"] }
+gloo = { version = "0.11.0", features = ["utils"], optional = true }
+yew = { version = "0.21.0", default-features = false, optional = true }
+
+[features]
+yew = ["dep:yew", "gloo"]
 
 [profile.release]
-codegen-units = 1
 opt-level = "z"
+debug = false
 lto = "thin"
+codegen-units = 1
+panic = "abort"
 strip = "symbols"
+incremental = false
+
+[badges]
+maintenance = { status = "actively-developed" }
