@@ -41,6 +41,10 @@ Refer to [our guide](YEW.md) to integrate this component into your Yew app.
 
 Refer to [our guide](DIOXUS.md) to integrate this component into your Dioxus app.
 
+## 🌱 Leptos Usage
+
+Refer to [our guide](LEPTOS.md) to integrate this component into your Leptos app.
+
 ## 🤝 Contributions
 
 Contributions are welcome! Whether it's bug fixes, feature requests, or examples, we would love your help to make Scroll-RS better.
