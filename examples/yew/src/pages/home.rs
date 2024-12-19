@@ -1,4 +1,5 @@
-use scroll_rs::yew::{Behavior, Scroll};
+use scroll_rs::yew::Scroll;
+use scroll_rs::Behavior;
 use yew::prelude::*;
 
 #[function_component(Home)]
